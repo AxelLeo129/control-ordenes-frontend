@@ -17,17 +17,26 @@ import {
 import {
   ListProductsComponent
 } from './pages/products/list-products/list-products.component';
+import { ProductsSellerComponent } from './pages/products/products-seller/products-seller.component';
 import {
   ReportsComponent
 } from './pages/products/reports/reports.component';
 
 const routes: Routes = [{
     path: '',
-    component: ListProductsComponent
+    component: ProductsSellerComponent
   },
   {
-    path: 'productos',
-    component: ListProductsComponent
+    path: 'buy',
+    component: ProductsSellerComponent
+  },
+  {
+    path: 'products',
+    component: ListProductsComponent,
+    canActivate: [SellerGuard],
+    data: {
+      expectedRol: ['admin', 'vendedor']
+    }
   },
   {
     path: 'login',

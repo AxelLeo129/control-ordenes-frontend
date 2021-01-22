@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralService } from 'src/app/services/general.service';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-modal-product',
@@ -17,7 +18,7 @@ export class ModalProductComponent implements OnInit {
   save_form: FormGroup;
   buttons: any;
 
-  constructor(public activeModal: NgbActiveModal, private generalService: GeneralService, private utilitiesService: UtilitiesService, private toastrService: ToastrService) { 
+  constructor(private authService: AuthService, public activeModal: NgbActiveModal, private generalService: GeneralService, private utilitiesService: UtilitiesService, private toastrService: ToastrService) { 
     this.save_form = this.createFormGroup();
   }
 
@@ -56,7 +57,7 @@ export class ModalProductComponent implements OnInit {
             });
             this.loading = false;
             this.activeModal.close('reload');
-            this.toastrService.success("Usuario actualizado exitosamente.");
+            this.toastrService.success("Producto actualizado exitosamente.");
           }).catch((err => {
             this.buttons.forEach((element: any) => {
               element.disabled = false;
@@ -76,7 +77,8 @@ export class ModalProductComponent implements OnInit {
     } else {
       let objU: any = {
         nombre: this.save_form.value.nombre,
-        precio: this.save_form.value.precio
+        precio: this.save_form.value.precio,
+        vendedor: JSON.parse(this.authService.getID())
       }
       this.generalService.post('/create', objU).then(() => {
         this.buttons.forEach((element: any) => {
@@ -84,7 +86,7 @@ export class ModalProductComponent implements OnInit {
         });
         this.loading = false;
         this.activeModal.close('reload');
-        this.toastrService.success("Usuario almacenado exitosamente.");
+        this.toastrService.success("Producto almacenado exitosamente.");
       }).catch((err => {
         console.log(err);
         this.buttons.forEach((element: any) => {

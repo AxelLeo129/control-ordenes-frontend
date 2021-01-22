@@ -10,7 +10,8 @@ exports.ModalProductComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var ModalProductComponent = /** @class */ (function () {
-    function ModalProductComponent(activeModal, generalService, utilitiesService, toastrService) {
+    function ModalProductComponent(authService, activeModal, generalService, utilitiesService, toastrService) {
+        this.authService = authService;
         this.activeModal = activeModal;
         this.generalService = generalService;
         this.utilitiesService = utilitiesService;
@@ -51,7 +52,7 @@ var ModalProductComponent = /** @class */ (function () {
                         });
                         _this.loading = false;
                         _this.activeModal.close('reload');
-                        _this.toastrService.success("Usuario actualizado exitosamente.");
+                        _this.toastrService.success("Producto actualizado exitosamente.");
                     })["catch"]((function (err) {
                         _this.buttons.forEach(function (element) {
                             element.disabled = false;
@@ -73,7 +74,8 @@ var ModalProductComponent = /** @class */ (function () {
         else {
             var objU = {
                 nombre: this.save_form.value.nombre,
-                precio: this.save_form.value.precio
+                precio: this.save_form.value.precio,
+                vendedor: JSON.parse(this.authService.getID())
             };
             this.generalService.post('/create', objU).then(function () {
                 _this.buttons.forEach(function (element) {
@@ -81,7 +83,7 @@ var ModalProductComponent = /** @class */ (function () {
                 });
                 _this.loading = false;
                 _this.activeModal.close('reload');
-                _this.toastrService.success("Usuario almacenado exitosamente.");
+                _this.toastrService.success("Producto almacenado exitosamente.");
             })["catch"]((function (err) {
                 console.log(err);
                 _this.buttons.forEach(function (element) {

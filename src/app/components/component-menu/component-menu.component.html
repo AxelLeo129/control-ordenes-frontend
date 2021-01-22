@@ -6,8 +6,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/"><i class="fa fa-list-alt"></i> Productos</a>
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/buy"><i class="fas fa-store"></i> Comprar</a>
+      </li>
+      <li class="nav-item" *ngIf="logeado">
+        <a class="nav-link" routerLink="/products"><i class="fa fa-list-alt"></i> Productos</a>
       </li>
       <li class="nav-item" *ngIf="logeado">
         <a class="nav-link" routerLink="/reports"><i class="fas fa-file-pdf"></i> Reportes</a>

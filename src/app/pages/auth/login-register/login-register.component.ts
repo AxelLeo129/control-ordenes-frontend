@@ -82,7 +82,14 @@ export class LoginRegisterComponent implements OnInit {
       this.authService.setUsername(res.nombreUsuario);
       this.authService.setAuthorities(res.authorities);
       this.roles = res.authorities;
-      this.router.navigate(["/productos"]);
+      this.authService.getUser(res.nombreUsuario).then((res: any) => {
+        this.authService.setID(res.id);
+        this.router.navigate(["/products"]);
+      }).catch(err => {
+        this.logeado = false;
+        this.logeado_fallido = true;
+        this.toastrService.error('Error en nombre de usuario o contraseña.');
+      });
     }).catch(err => {
       this.logeado = false;
       this.logeado_fallido = true;

@@ -42,28 +42,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.ListProductsComponent = void 0;
+exports.ProductsSellerComponent = void 0;
 var core_1 = require("@angular/core");
-var modal_product_component_1 = require("src/app/components/modal-product/modal-product.component");
-var ListProductsComponent = /** @class */ (function () {
-    function ListProductsComponent(authService, generalService, modalService, utilitiesService, toastrService) {
-        this.authService = authService;
+var ProductsSellerComponent = /** @class */ (function () {
+    function ProductsSellerComponent(generalService) {
         this.generalService = generalService;
-        this.modalService = modalService;
-        this.utilitiesService = utilitiesService;
-        this.toastrService = toastrService;
         this.displayedColumns = ['id', 'nombre', 'precio', 'acciones'];
         this.dataSource = [];
     }
-    ListProductsComponent.prototype.ngOnInit = function () {
+    ProductsSellerComponent.prototype.ngOnInit = function () {
         this.getData();
     };
-    ListProductsComponent.prototype.getData = function () {
+    ProductsSellerComponent.prototype.getData = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.generalService.get('/api/listar_id/' + this.authService.getID())];
+                    case 0: return [4 /*yield*/, this.generalService.get('/api/lista')];
                     case 1:
                         data = _a.sent();
                         this.dataSource = data;
@@ -72,35 +67,15 @@ var ListProductsComponent = /** @class */ (function () {
             });
         });
     };
-    ListProductsComponent.prototype.open = function (producto) {
-        var _this = this;
-        var modalRef = this.modalService.open(modal_product_component_1.ModalProductComponent);
-        modalRef.componentInstance.producto = producto;
-        modalRef.result.then(function (result) {
-            if (result == 'reload')
-                _this.getData();
-        });
+    ProductsSellerComponent.prototype.open = function () {
     };
-    ListProductsComponent.prototype.deleteProduct = function (id) {
-        var _this = this;
-        this.utilitiesService.showSweetAlertConfirm('¡Atención!', '¡Está seguro de eliminar este producto?', 'Aceptar', 'Cancelar').then(function (res) {
-            if (res.isConfirmed == true) {
-                _this.generalService["delete"]('/delete/' + id).then(function () {
-                    _this.toastrService.success('Producto eliminado exitosamente');
-                    _this.getData();
-                })["catch"](function () {
-                    _this.toastrService.error('Por favor, itentelo más tarde.');
-                });
-            }
-        });
-    };
-    ListProductsComponent = __decorate([
+    ProductsSellerComponent = __decorate([
         core_1.Component({
-            selector: 'app-list-products',
-            templateUrl: './list-products.component.html',
-            styleUrls: ['./list-products.component.scss']
+            selector: 'app-products-seller',
+            templateUrl: './products-seller.component.html',
+            styles: []
         })
-    ], ListProductsComponent);
-    return ListProductsComponent;
+    ], ProductsSellerComponent);
+    return ProductsSellerComponent;
 }());
-exports.ListProductsComponent = ListProductsComponent;
+exports.ProductsSellerComponent = ProductsSellerComponent;

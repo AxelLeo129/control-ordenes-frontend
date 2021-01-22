@@ -2,6 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AuthService
 } from 'src/app/services/auth.service';
@@ -15,7 +16,7 @@ export class ComponentMenuComponent implements OnInit {
 
   logeado: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.authService.getToken())
@@ -26,7 +27,7 @@ export class ComponentMenuComponent implements OnInit {
 
   logout() {
     this.authService.logOut();
-    window.location.reload();
+    this.router.navigate(['/buy']);
   }
 
 }

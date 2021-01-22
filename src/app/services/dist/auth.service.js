@@ -10,6 +10,7 @@ exports.AuthService = void 0;
 var core_1 = require("@angular/core");
 var TOKEN_KEY = 'AuthToken';
 var USERNAME_KEY = 'AuthUserName';
+var ID_KEY = 'AuthID';
 var AUTHORITIES_KEY = 'AuthAuthorities';
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
@@ -39,6 +40,13 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.getUsername = function () {
         return sessionStorage.getItem(USERNAME_KEY);
+    };
+    AuthService.prototype.setID = function (id) {
+        window.sessionStorage.removeItem(ID_KEY);
+        window.sessionStorage.setItem(ID_KEY, JSON.stringify(id));
+    };
+    AuthService.prototype.getID = function () {
+        return sessionStorage.getItem(ID_KEY);
     };
     AuthService.prototype.setAuthorities = function (authorities) {
         window.sessionStorage.removeItem(AUTHORITIES_KEY);

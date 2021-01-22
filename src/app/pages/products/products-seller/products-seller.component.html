@@ -1,58 +1,55 @@
 <app-component-menu></app-component-menu>
 <div class="container">
-  <div align="center" class="row div-padding">
-    <h2>Listado Productos</h2>
+  <div align="center" class="row" style="padding: 10px;">
+    <h2>Compra Productos</h2>
   </div>
-  <div class="row div-padding" *ngIf="dataSource.length > 0">
-    <div class="col-xs-12">
-      <button class="btn btn-primary" (click)="open(false)">Nuevo Producto</button>
-    </div>
-  </div>
-  <div class="row div-padding">
+  <div class="row" style="padding: 10px;">
     <div class="col-xs-12">
       <ng-container *ngIf="dataSource.length > 0; else no_data">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table style="width: 100%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
-        
+
           <!-- Position Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> <strong style="color: black;">No.</strong> </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
           </ng-container>
-        
+
           <!-- Name Column -->
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> <strong style="color: black;">Nombre</strong> </th>
             <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
           </ng-container>
-        
+
           <!-- Weight Column -->
           <ng-container matColumnDef="precio">
             <th mat-header-cell *matHeaderCellDef> <strong style="color: black;">Precio</strong> </th>
             <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
           </ng-container>
-        
+
           <!-- Symbol Column -->
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef> <strong style="color: black;">Acciones</strong> </th>
-            <td mat-cell *matCellDef="let element">   
-              <button class="btn btn-warning" (click)="open(element)"><i class="far fa-edit"></i> Editar</button>&nbsp;
-              <button class="btn btn-danger" (click)="deleteProduct(element.id)"><i class="far fa-trash-alt"></i> Eliminar</button>
+            <td mat-cell *matCellDef="let element">
+              <button class="btn btn-info" (click)="open(element)"><i class="fas fa-plus"></i> Agregar al
+                carrito</button>&nbsp;
             </td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </ng-container>
       <ng-template #no_data>
-        <div class="container d-flex justify-content-center div-padding">
-          <div class="card">
+        <div class="container d-flex justify-content-center" style="padding: 10px;">
+          <div class="card" style="width: 50%;">
             <div class="card-body">
-              <button class="btn btn-primary" (click)="open(false)">Nuevo Producto</button>
-              Agrega un nuevo producto.
+              <h2 class="card-title">!Lo Sentimos!</h2>
+              <h3 class="card-subtitle mb-2 text-muted">De momento no existen productos</h3>
+              <p class="card-text">Crea una cuenta o inicia sesión para agregar tus productos.</p>
+              <a routerLink="/login" class="card-link">Inicia Sesión / Regístrate</a>
             </div>
           </div>
         </div>
@@ -60,5 +57,3 @@
     </div>
   </div>
 </div>
-  
-

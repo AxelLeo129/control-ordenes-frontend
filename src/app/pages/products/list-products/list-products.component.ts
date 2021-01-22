@@ -13,34 +13,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ListProductsComponent implements OnInit {
 
-  closeResult = '';
   displayedColumns: string[] = ['id', 'nombre', 'precio', 'acciones'];
   dataSource: Array < any > = [];
-  roles: string[];
-  rol_admin: boolean = false;
-  uid: number;
 
   constructor(private authService: AuthService, private generalService: GeneralService, private modalService: NgbModal, private utilitiesService: UtilitiesService, private toastrService: ToastrService) { }
 
-  async ngOnInit() {
+  ngOnInit(): void {
     this.getData();
-    this.roles = this.authService.getAuthorities();
-    this.roles.forEach(rol => {
-      if(rol == 'ROLE_VENDEDOR')
-        this.rol_admin = true;
-    })
-    if(this.authService.getToken()) {
-      const usuario: any = await this.authService.getUser(this.authService.getUsername());
-      this.uid = usuario.id;
-    } 
   }
 
   async getData() {
-    let data: any;
-    if(this.uid)
-      data = await this.generalService.get('/api/lista');
-    else
-      data = await this.generalService.get('/api/lista');
+    const data: any = await this.generalService.get('/api/listar_id/' + this.authService.getID());
     this.dataSource = data;
   }
 

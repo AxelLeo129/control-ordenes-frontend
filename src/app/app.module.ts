@@ -19,6 +19,7 @@ import { ReportsComponent } from './pages/products/reports/reports.component';
 import { CheckoutComponent } from './pages/products/checkout/checkout.component';
 import { ComponentMenuComponent } from './components/component-menu/component-menu.component';
 import { interceptorProvider } from './services/interceptor.service';
+import { ProductsSellerComponent } from './pages/products/products-seller/products-seller.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { interceptorProvider } from './services/interceptor.service';
     LoginRegisterComponent,
     ReportsComponent,
     CheckoutComponent,
-    ComponentMenuComponent
+    ComponentMenuComponent,
+    ProductsSellerComponent
   ],
   imports: [
     BrowserModule,

@@ -68,7 +68,14 @@ var LoginRegisterComponent = /** @class */ (function () {
             _this.authService.setUsername(res.nombreUsuario);
             _this.authService.setAuthorities(res.authorities);
             _this.roles = res.authorities;
-            _this.router.navigate(["/productos"]);
+            _this.authService.getUser(res.nombreUsuario).then(function (res) {
+                _this.authService.setID(res.id);
+                _this.router.navigate(["/products"]);
+            })["catch"](function (err) {
+                _this.logeado = false;
+                _this.logeado_fallido = true;
+                _this.toastrService.error('Error en nombre de usuario o contraseña.');
+            });
         })["catch"](function (err) {
             _this.logeado = false;
             _this.logeado_fallido = true;

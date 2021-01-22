@@ -13,14 +13,23 @@ var seller_guard_1 = require("./guards/seller.guard");
 var login_register_component_1 = require("./pages/auth/login-register/login-register.component");
 var checkout_component_1 = require("./pages/products/checkout/checkout.component");
 var list_products_component_1 = require("./pages/products/list-products/list-products.component");
+var products_seller_component_1 = require("./pages/products/products-seller/products-seller.component");
 var reports_component_1 = require("./pages/products/reports/reports.component");
 var routes = [{
         path: '',
-        component: list_products_component_1.ListProductsComponent
+        component: products_seller_component_1.ProductsSellerComponent
     },
     {
-        path: 'productos',
-        component: list_products_component_1.ListProductsComponent
+        path: 'buy',
+        component: products_seller_component_1.ProductsSellerComponent
+    },
+    {
+        path: 'products',
+        component: list_products_component_1.ListProductsComponent,
+        canActivate: [seller_guard_1.SellerGuard],
+        data: {
+            expectedRol: ['admin', 'vendedor']
+        }
     },
     {
         path: 'login',
