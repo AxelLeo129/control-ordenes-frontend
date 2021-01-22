@@ -44,9 +44,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.ProductsSellerComponent = void 0;
 var core_1 = require("@angular/core");
+var modal_add_cart_component_1 = require("src/app/components/modal-add-cart/modal-add-cart.component");
 var ProductsSellerComponent = /** @class */ (function () {
-    function ProductsSellerComponent(generalService) {
+    function ProductsSellerComponent(generalService, modalService) {
         this.generalService = generalService;
+        this.modalService = modalService;
         this.displayedColumns = ['id', 'nombre', 'precio', 'acciones'];
         this.dataSource = [];
     }
@@ -67,7 +69,9 @@ var ProductsSellerComponent = /** @class */ (function () {
             });
         });
     };
-    ProductsSellerComponent.prototype.open = function () {
+    ProductsSellerComponent.prototype.open = function (producto) {
+        var modalRef = this.modalService.open(modal_add_cart_component_1.ModalAddCartComponent);
+        modalRef.componentInstance.producto = producto;
     };
     ProductsSellerComponent = __decorate([
         core_1.Component({

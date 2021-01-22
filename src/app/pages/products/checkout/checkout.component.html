@@ -1,2 +1,58 @@
 <app-component-menu></app-component-menu>
-<p>checkout works!</p>
+<div class="container d-flex justify-content-center" style="padding: 10px;">
+  <ng-container *ngIf="cart.length > 0; else no_data">
+    <div class="card" style="width: 75%;">
+      <div class="card-body">
+        <h2 class="card-title">Checkout</h2>
+        <h3 class="card-subtitle mb-2 text-muted">Productos a ordenar</h3>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-primary">Productos</li>
+          <li class="list-group-item" *ngFor="let producto of cart; index as i">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <p><strong>Nombre: </strong>{{ producto?.nombre }}</p>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <p><strong>Precio: </strong>Q {{ producto?.precio }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="example-button-container col-xs-12 col-md-6">
+                <button (click)="rest(producto, i)" mat-mini-fab color="primary">
+                  <mat-icon><i class="fas fa-minus"></i></mat-icon>
+                </button>
+                <h5 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: large;">{{ producto.qty }}
+                </h5>
+                <button (click)="sum(producto)" mat-mini-fab color="primary"
+                  aria-label="Example icon button with a plus one icon">
+                  <mat-icon><i class="fas fa-plus"></i></mat-icon>
+                </button>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <p><strong>Total: </strong>Q {{ producto?.precio * producto.qty }}</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-info">
+            <p><strong>Total: </strong>Q {{ total }}</p>
+          </li>
+        </ul>
+        <p class="card-text" style="padding-top: 10px;">Procede a realizar la compra.</p>
+        <button class="btn btn-primary">Ordenar / Comprar</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #no_data>
+    <div class="container d-flex justify-content-center" style="padding: 10px;">
+      <div class="card" style="width: 50%;">
+        <div class="card-body">
+          <h2 class="card-title">Checkout</h2>
+          <h3 class="card-title">No hay productos en el carrito</h3>
+          <h3 class="card-subtitle mb-2 text-muted">Busca tu producto y agrégalo para proceder</h3>
+          <p class="card-text">Comprar producto.</p>
+          <button class="btn btn-primary" routerLink="/buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

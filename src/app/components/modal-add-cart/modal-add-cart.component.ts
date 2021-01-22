@@ -1,0 +1,36 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
+
+@Component({
+  selector: 'app-modal-add-cart',
+  templateUrl: './modal-add-cart.component.html',
+  styleUrls: ['./modal-add-cart.component.scss']
+})
+export class ModalAddCartComponent implements OnInit {
+
+  @Input() producto: any;
+  cantidad: number = 0;
+
+  constructor(public modal: NgbActiveModal, private cartService: CartService, private toastrService: ToastrService) { }
+
+  ngOnInit(): void {
+  }
+
+  sum() {
+    this.cantidad++;
+  }
+
+  rest() {
+    if(this.cantidad > 0)
+      this.cantidad--;
+  }
+
+  addToCart() {
+    this.cartService.add(this.producto, this.cantidad);
+    this.toastrService.success('Producto agregado al carrito');
+    this.modal.dismiss();
+  }
+
+}

@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">{{ producto?.nombre }}</h4>
+  <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p><strong>Precio: </strong>Q {{ producto?.precio }}</p>
+  <div class="row">
+    <div class="example-button-container col-xs-12 col-md-6">
+      <button (click)="rest()" mat-mini-fab color="primary">
+        <mat-icon><i class="fas fa-minus"></i></mat-icon>
+      </button>
+      <input type="number" [(ngModel)]="cantidad" class="form-control" style="width: 25% !important; display: inline; margin: 10px;">
+      <button (click)="sum()" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+        <mat-icon><i class="fas fa-plus"></i></mat-icon>
+      </button>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <p><strong>Total: </strong>Q {{ producto?.precio * cantidad }}</p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" class="btn btn-primary" [disabled]="cantidad <= 0" (click)="addToCart()">Agregar</button>
+</div>

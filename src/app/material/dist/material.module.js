@@ -10,7 +10,8 @@ exports.MaterialModule = void 0;
 var core_1 = require("@angular/core");
 var button_1 = require("@angular/material/button");
 var table_1 = require("@angular/material/table");
-var MaterialComponents = [button_1.MatButtonModule, table_1.MatTableModule];
+var icon_1 = require("@angular/material/icon");
+var MaterialComponents = [button_1.MatButtonModule, table_1.MatTableModule, icon_1.MatIconModule];
 var MaterialModule = /** @class */ (function () {
     function MaterialModule() {
     }
