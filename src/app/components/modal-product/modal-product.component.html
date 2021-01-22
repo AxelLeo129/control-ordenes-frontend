@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Titulo</h4>
+  <button type="button" class="close button-close" aria-label="Close" (click)="activeModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="save_form" (ngSubmit)="create()">
+    <div class="row show-grid">
+      <div class="col-md-12">
+        <div class="div-none">Nombre</div>
+        <input type="text" placeholder="Nombre" name="nombre" formControlName="nombre">
+        <div class="errors" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <span *ngIf="nombre.errors.required">
+            <small>Este campo es requerido</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="div-none">Precio</div>
+        <input type="number" placeholder="Precio" name="precio"
+          formControlName="precio">
+        <div class="errors" *ngIf="precio.invalid && (precio.dirty || precio.touched)">
+          <span *ngIf="precio.errors.required">
+            <small>Este campo es requerido</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="div-none" align="center">
+          <button type="submit" [disabled]="!save_form.valid">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
