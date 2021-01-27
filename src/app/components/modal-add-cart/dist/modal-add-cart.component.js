@@ -14,10 +14,11 @@ var ModalAddCartComponent = /** @class */ (function () {
         this.cartService = cartService;
         this.toastrService = toastrService;
         this.change = change;
-        this.cantidad = 0;
+        this.cantidad = 1;
         this.total = 0;
     }
     ModalAddCartComponent.prototype.ngOnInit = function () {
+        this.total = (this.cantidad * this.producto.precio);
     };
     ModalAddCartComponent.prototype.sum = function () {
         this.cantidad++;

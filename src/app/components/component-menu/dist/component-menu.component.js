@@ -9,9 +9,8 @@ exports.__esModule = true;
 exports.ComponentMenuComponent = void 0;
 var core_1 = require("@angular/core");
 var ComponentMenuComponent = /** @class */ (function () {
-    function ComponentMenuComponent(authService, router) {
+    function ComponentMenuComponent(authService) {
         this.authService = authService;
-        this.router = router;
         this.logeado = false;
     }
     ComponentMenuComponent.prototype.ngOnInit = function () {
@@ -22,7 +21,7 @@ var ComponentMenuComponent = /** @class */ (function () {
     };
     ComponentMenuComponent.prototype.logout = function () {
         this.authService.logOut();
-        this.router.navigate(['/buy']);
+        location.href = '/buy';
     };
     ComponentMenuComponent = __decorate([
         core_1.Component({

@@ -47,7 +47,7 @@ export class ModalInputCheckoutComponent implements OnInit {
           cantidad: element.qty,
           compra: id,
           producto: element.id,
-          precio: element.precio
+          precio: element.precio * element.qty
         }
         promesas.push(this.generalService.post('/producto_compra/create', objPC));
       });

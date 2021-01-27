@@ -19,24 +19,31 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-6">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Precio</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of productos; index as i">
-              <th scope="row">{{ i + 1 }}</th>
-              <td>{{ item.nombre }}</td>
-              <td>{{ item.cantidad }}</td>
-              <td>Q {{ item.precio | number: '1.0-2' }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <ng-container *ngIf="productos.length > 0; else no_data">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of productos; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>Q {{ item.precio | number: '1.0-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-template #no_data>
+          <div class="alert alert-primary" role="alert">
+            No has realizado ventas aún.
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

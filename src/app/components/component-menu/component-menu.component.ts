@@ -16,7 +16,7 @@ export class ComponentMenuComponent implements OnInit {
 
   logeado: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     if (this.authService.getToken())
@@ -27,7 +27,7 @@ export class ComponentMenuComponent implements OnInit {
 
   logout() {
     this.authService.logOut();
-    this.router.navigate(['/buy']);
+    location.href = '/buy';
   }
 
 }

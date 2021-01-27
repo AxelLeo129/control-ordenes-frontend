@@ -43,7 +43,7 @@ var ModalInputCheckoutComponent = /** @class */ (function () {
                     cantidad: element.qty,
                     compra: id,
                     producto: element.id,
-                    precio: element.precio
+                    precio: element.precio * element.qty
                 };
                 promesas.push(_this.generalService.post('/producto_compra/create', objPC));
             });

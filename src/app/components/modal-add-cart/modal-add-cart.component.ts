@@ -12,12 +12,13 @@ import { CartService } from 'src/app/services/cart.service';
 export class ModalAddCartComponent implements OnInit {
 
   @Input() producto: any;
-  cantidad: number = 0;
+  cantidad: number = 1;
   total: number = 0;
 
   constructor(public modal: NgbActiveModal, private cartService: CartService, private toastrService: ToastrService, private change: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.total = (this.cantidad * this.producto.precio);
   }
 
   sum() {
