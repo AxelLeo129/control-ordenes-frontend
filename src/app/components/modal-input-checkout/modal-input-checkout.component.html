@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Ingrese el nombre del comprador</h4>
+  <button type="button" class="close button-close" aria-label="Close" (click)="modal.close('close')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="name_form" (ngSubmit)="buy()">
+    <div class="form-group">
+      <label for="dateOfBirth">Nombre Usuario</label>
+      <div class="input-group">
+        <input id="dateOfBirth" class="form-control" type="text" placeholder="Nombre Usuario"
+          formControlName="nombre" name="nombre_usuario">
+      </div>
+      <div class="errors" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+        <span *ngIf="nombre.errors.required">
+          <small>Este campo es requerido</small>
+        </span>
+      </div>
+    </div>
+    <button type="submit" class="btn color-success-button" [disabled]="!name_form.valid">Aceptar</button>
+  </form>
+</div>

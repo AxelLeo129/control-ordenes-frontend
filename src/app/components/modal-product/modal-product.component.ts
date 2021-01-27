@@ -47,11 +47,9 @@ export class ModalProductComponent implements OnInit {
     });
     this.loading = true;
     if (this.producto != false) {
-      this.producto.nombre = this.save_form.value.nombre;
-      this.producto.precio = this.save_form.value.precio;
       this.utilitiesService.showSweetAlertConfirm('¡Atención!', `<p>¿Está seguro de actualizar este producto?<p>`, 'Aceptar', 'Cancelar').then((res: any) => {
         if (res.isConfirmed == true) {
-          this.generalService.put('/update/' + this.producto.id, this.producto).then(() => {
+          this.generalService.put('/producto/update/' + this.producto.id, this.save_form.value).then(() => {
             this.buttons.forEach((element: any) => {
               element.disabled = false;
             });
@@ -80,7 +78,7 @@ export class ModalProductComponent implements OnInit {
         precio: this.save_form.value.precio,
         vendedor: JSON.parse(this.authService.getID())
       }
-      this.generalService.post('/create', objU).then(() => {
+      this.generalService.post('/producto/create', objU).then(() => {
         this.buttons.forEach((element: any) => {
           element.disabled = false;
         });

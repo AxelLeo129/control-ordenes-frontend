@@ -52,7 +52,6 @@ export class CartService {
     }
     this.cart[index].total = this.cart[index].qty * parseInt(this.cart[index].precio);
     sessionStorage.setItem('products', JSON.stringify(this.cart));
-    this.calculateTotal();
   }
 
   decrease(product: any) {
@@ -65,31 +64,6 @@ export class CartService {
       this.cart.splice(index, 1);
     }
     sessionStorage.setItem('products', JSON.stringify(this.cart));
-    this.calculateTotal();
-  }
-
-  calculateTotal(): void {
-    let finalPrice = this.getVariable('finalPrice');
-    let totalQty = this.getVariable('totalQty');
-    this.cart.forEach(item => {
-      totalQty = totalQty + parseInt(item.qty);
-      finalPrice = finalPrice + parseInt(item.total)
-    });
-    this.setVariable('finalPrice', finalPrice);
-    this.setVariable('productCount', this.cart.length);
-    this.setVariable('totalQty', totalQty);
-  }
-
-  getVariable(nombre: string): number {
-    let varible: number = JSON.parse(localStorage.getItem(nombre));
-    console.log(varible, nombre)
-    if(varible == null)
-      varible = 0;
-    return varible;
-  }
-
-  setVariable(nombre: string, valor: number): void {
-    sessionStorage.setItem(nombre, JSON.stringify(valor)); 
   }
 
 }

@@ -1,2 +1,43 @@
 <app-component-menu></app-component-menu>
-<p>reports works!</p>
+<div class="container d-flex justify-content-center" style="padding: 10px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12" align="center">
+        <h1>Reportes</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="card" style="width: 75%;">
+          <div class="card-body">
+            <h2 class="card-title">{{ nombre_usuario }}</h2>
+            <hr>
+            <h3 class="card-subtitle mb-2 text-dark">Detalles generales: </h3>
+            <p class="card-text"><strong>Total ventas global: </strong> Q {{ total | number: '1.0-2' }}</p>
+            <p class="card-text"><strong>Promedio de precios: </strong> Q {{ promedio | number: '1.0-2' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productos; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>Q {{ item.precio | number: '1.0-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -60,7 +60,7 @@ var ProductsSellerComponent = /** @class */ (function () {
             var data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.generalService.get('/api/lista')];
+                    case 0: return [4 /*yield*/, this.generalService.get('/producto/lista')];
                     case 1:
                         data = _a.sent();
                         this.dataSource = data;

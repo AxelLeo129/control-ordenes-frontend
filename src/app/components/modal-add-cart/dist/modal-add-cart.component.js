@@ -9,20 +9,27 @@ exports.__esModule = true;
 exports.ModalAddCartComponent = void 0;
 var core_1 = require("@angular/core");
 var ModalAddCartComponent = /** @class */ (function () {
-    function ModalAddCartComponent(modal, cartService, toastrService) {
+    function ModalAddCartComponent(modal, cartService, toastrService, change) {
         this.modal = modal;
         this.cartService = cartService;
         this.toastrService = toastrService;
+        this.change = change;
         this.cantidad = 0;
+        this.total = 0;
     }
     ModalAddCartComponent.prototype.ngOnInit = function () {
     };
     ModalAddCartComponent.prototype.sum = function () {
         this.cantidad++;
+        this.total = (this.cantidad * this.producto.precio);
+        this.change.detectChanges();
     };
     ModalAddCartComponent.prototype.rest = function () {
-        if (this.cantidad > 0)
+        if (this.cantidad > 0) {
             this.cantidad--;
+            this.total = (this.cantidad * this.producto.precio);
+            this.change.detectChanges();
+        }
     };
     ModalAddCartComponent.prototype.addToCart = function () {
         this.cartService.add(this.producto, this.cantidad);
@@ -36,7 +43,8 @@ var ModalAddCartComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-modal-add-cart',
             templateUrl: './modal-add-cart.component.html',
-            styleUrls: ['./modal-add-cart.component.scss']
+            styleUrls: ['./modal-add-cart.component.scss'],
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         })
     ], ModalAddCartComponent);
     return ModalAddCartComponent;

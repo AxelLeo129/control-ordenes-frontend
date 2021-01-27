@@ -20,7 +20,7 @@ export class ProductsSellerComponent implements OnInit {
   }
 
   async getData() {
-    const data: any = await this.generalService.get('/api/lista');
+    const data: any = await this.generalService.get('/producto/lista');
     this.dataSource = data;
   }
 

@@ -23,7 +23,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   async getData() {
-    const data: any = await this.generalService.get('/api/listar_id/' + this.authService.getID());
+    const data: any = await this.generalService.get('/producto/listar_id/' + this.authService.getID());
     this.dataSource = data;
   }
 
@@ -33,13 +33,13 @@ export class ListProductsComponent implements OnInit {
     modalRef.result.then((result) => {
       if(result == 'reload')
         this.getData();
-    });
+    }).catch(err => console.log(err));
   }
 
   deleteProduct(id: number) {
     this.utilitiesService.showSweetAlertConfirm('¡Atención!', '¡Está seguro de eliminar este producto?', 'Aceptar', 'Cancelar').then((res: any) => {
       if (res.isConfirmed == true) { 
-        this.generalService.delete('/delete/' + id).then(() => {
+        this.generalService.delete('/producto/delete/' + id).then(() => {
           this.toastrService.success('Producto eliminado exitosamente');
           this.getData();
         }).catch(() => {

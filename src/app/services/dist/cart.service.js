@@ -53,7 +53,6 @@ var CartService = /** @class */ (function () {
         }
         this.cart[index].total = this.cart[index].qty * parseInt(this.cart[index].precio);
         sessionStorage.setItem('products', JSON.stringify(this.cart));
-        this.calculateTotal();
     };
     CartService.prototype.decrease = function (product) {
         this.cart = this.get();
@@ -66,28 +65,6 @@ var CartService = /** @class */ (function () {
             this.cart.splice(index, 1);
         }
         sessionStorage.setItem('products', JSON.stringify(this.cart));
-        this.calculateTotal();
-    };
-    CartService.prototype.calculateTotal = function () {
-        var finalPrice = this.getVariable('finalPrice');
-        var totalQty = this.getVariable('totalQty');
-        this.cart.forEach(function (item) {
-            totalQty = totalQty + parseInt(item.qty);
-            finalPrice = finalPrice + parseInt(item.total);
-        });
-        this.setVariable('finalPrice', finalPrice);
-        this.setVariable('productCount', this.cart.length);
-        this.setVariable('totalQty', totalQty);
-    };
-    CartService.prototype.getVariable = function (nombre) {
-        var varible = JSON.parse(localStorage.getItem(nombre));
-        console.log(varible, nombre);
-        if (varible == null)
-            varible = 0;
-        return varible;
-    };
-    CartService.prototype.setVariable = function (nombre, valor) {
-        sessionStorage.setItem(nombre, JSON.stringify(valor));
     };
     CartService = __decorate([
         core_1.Injectable({

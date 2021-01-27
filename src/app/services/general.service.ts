@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class GeneralService {
 
-  url_principal = 'http://localhost:8080/producto';
+  url_principal = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 

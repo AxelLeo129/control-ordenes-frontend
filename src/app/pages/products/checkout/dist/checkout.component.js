@@ -8,9 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.CheckoutComponent = void 0;
 var core_1 = require("@angular/core");
+var modal_input_checkout_component_1 = require("src/app/components/modal-input-checkout/modal-input-checkout.component");
 var CheckoutComponent = /** @class */ (function () {
-    function CheckoutComponent(cartService) {
+    function CheckoutComponent(cartService, modalService, router) {
         this.cartService = cartService;
+        this.modalService = modalService;
+        this.router = router;
         this.cart = [];
         this.total = 0;
     }
@@ -25,7 +28,7 @@ var CheckoutComponent = /** @class */ (function () {
         });
         this.total = total_temporal;
     };
-    CheckoutComponent.prototype.rest = function (producto, indice) {
+    CheckoutComponent.prototype.rest = function (producto) {
         if (producto.qty > 0) {
             producto.qty--;
             this.cartService.decrease(producto);
@@ -36,6 +39,15 @@ var CheckoutComponent = /** @class */ (function () {
         producto.qty++;
         this.cartService.add(producto, producto.qty++);
         this.getCart();
+    };
+    CheckoutComponent.prototype.checkout = function () {
+        var _this = this;
+        var modalRef = this.modalService.open(modal_input_checkout_component_1.ModalInputCheckoutComponent);
+        modalRef.componentInstance.total = this.total;
+        modalRef.result.then(function (res) {
+            if (res == 'reload')
+                _this.router.navigate(['/buy']);
+        })["catch"](function (err) { return console.log(err); });
     };
     CheckoutComponent = __decorate([
         core_1.Component({

@@ -1,3 +1,13 @@
+.color-success-button {
+  color: white;
+  background-color: var(--primary);
+}
+
+.color-success-button:disabled {
+  color: black;
+  background-color: var(--secondary);
+}
+
 .errors {
   background: #f04141 !important;
   border-radius: 4px;

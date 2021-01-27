@@ -63,7 +63,7 @@ var ListProductsComponent = /** @class */ (function () {
             var data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.generalService.get('/api/listar_id/' + this.authService.getID())];
+                    case 0: return [4 /*yield*/, this.generalService.get('/producto/listar_id/' + this.authService.getID())];
                     case 1:
                         data = _a.sent();
                         this.dataSource = data;
@@ -79,13 +79,13 @@ var ListProductsComponent = /** @class */ (function () {
         modalRef.result.then(function (result) {
             if (result == 'reload')
                 _this.getData();
-        });
+        })["catch"](function (err) { return console.log(err); });
     };
     ListProductsComponent.prototype.deleteProduct = function (id) {
         var _this = this;
         this.utilitiesService.showSweetAlertConfirm('¡Atención!', '¡Está seguro de eliminar este producto?', 'Aceptar', 'Cancelar').then(function (res) {
             if (res.isConfirmed == true) {
-                _this.generalService["delete"]('/delete/' + id).then(function () {
+                _this.generalService["delete"]('/producto/delete/' + id).then(function () {
                     _this.toastrService.success('Producto eliminado exitosamente');
                     _this.getData();
                 })["catch"](function () {

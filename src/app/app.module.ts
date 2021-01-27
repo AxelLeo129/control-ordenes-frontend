@@ -21,6 +21,7 @@ import { ComponentMenuComponent } from './components/component-menu/component-me
 import { interceptorProvider } from './services/interceptor.service';
 import { ProductsSellerComponent } from './pages/products/products-seller/products-seller.component';
 import { ModalAddCartComponent } from './components/modal-add-cart/modal-add-cart.component';
+import { ModalInputCheckoutComponent } from './components/modal-input-checkout/modal-input-checkout.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ModalAddCartComponent } from './components/modal-add-cart/modal-add-car
     CheckoutComponent,
     ComponentMenuComponent,
     ProductsSellerComponent,
-    ModalAddCartComponent
+    ModalAddCartComponent,
+    ModalInputCheckoutComponent
   ],
   imports: [
     BrowserModule,

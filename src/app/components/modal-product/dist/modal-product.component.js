@@ -42,11 +42,9 @@ var ModalProductComponent = /** @class */ (function () {
         });
         this.loading = true;
         if (this.producto != false) {
-            this.producto.nombre = this.save_form.value.nombre;
-            this.producto.precio = this.save_form.value.precio;
             this.utilitiesService.showSweetAlertConfirm('¡Atención!', "<p>\u00BFEst\u00E1 seguro de actualizar este producto?<p>", 'Aceptar', 'Cancelar').then(function (res) {
                 if (res.isConfirmed == true) {
-                    _this.generalService.put('/update/' + _this.producto.id, _this.producto).then(function () {
+                    _this.generalService.put('/producto/update/' + _this.producto.id, _this.save_form.value).then(function () {
                         _this.buttons.forEach(function (element) {
                             element.disabled = false;
                         });
@@ -77,7 +75,7 @@ var ModalProductComponent = /** @class */ (function () {
                 precio: this.save_form.value.precio,
                 vendedor: JSON.parse(this.authService.getID())
             };
-            this.generalService.post('/create', objU).then(function () {
+            this.generalService.post('/producto/create', objU).then(function () {
                 _this.buttons.forEach(function (element) {
                     element.disabled = false;
                 });

@@ -42,34 +42,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.GeneralService = void 0;
+exports.ReportsComponent = void 0;
 var core_1 = require("@angular/core");
-var GeneralService = /** @class */ (function () {
-    function GeneralService(http) {
-        this.http = http;
-        this.url_principal = 'http://localhost:8080';
+var ReportsComponent = /** @class */ (function () {
+    function ReportsComponent(generalService, authService) {
+        this.generalService = generalService;
+        this.authService = authService;
+        this.total = 0;
+        this.promedio = 0;
+        this.productos = [];
     }
-    GeneralService.prototype.get = function (url) {
-        return this.http.get(this.url_principal + url).toPromise();
+    ReportsComponent.prototype.ngOnInit = function () {
+        this.getData();
     };
-    GeneralService.prototype.post = function (url, obj) {
-        return this.http.post(this.url_principal + url, obj).toPromise();
-    };
-    GeneralService.prototype.put = function (url, obj) {
-        return this.http.put(this.url_principal + url, obj).toPromise();
-    };
-    GeneralService.prototype["delete"] = function (url) {
-        return __awaiter(this, void 0, Promise, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.http["delete"](this.url_principal + url).toPromise()];
+    ReportsComponent.prototype.getData = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, _a, ObjT, ObjM;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.nombre_usuario = this.authService.getUsername();
+                        id = this.authService.getID();
+                        _a = this;
+                        return [4 /*yield*/, this.generalService.get('/producto_compra/reports/' + id)];
+                    case 1:
+                        _a.productos = _b.sent();
+                        return [4 /*yield*/, this.generalService.get('/producto_compra/total/' + id)];
+                    case 2:
+                        ObjT = _b.sent();
+                        this.total = ObjT.total;
+                        return [4 /*yield*/, this.generalService.get('/producto_compra/promedio/' + id)];
+                    case 3:
+                        ObjM = _b.sent();
+                        this.promedio = ObjM.mean;
+                        return [2 /*return*/];
+                }
             });
         });
     };
-    GeneralService = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
+    ReportsComponent = __decorate([
+        core_1.Component({
+            selector: 'app-reports',
+            templateUrl: './reports.component.html',
+            styleUrls: ['./reports.component.scss']
         })
-    ], GeneralService);
-    return GeneralService;
+    ], ReportsComponent);
+    return ReportsComponent;
 }());
-exports.GeneralService = GeneralService;
+exports.ReportsComponent = ReportsComponent;
